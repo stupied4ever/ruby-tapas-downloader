@@ -1,6 +1,7 @@
 require 'mechanize'
-require 'logger'
 require 'active_support/core_ext/string/inflections'
+require 'logger'
+require 'yaml'
 
 class Download
   MAIN_URL    = 'https://rubytapas.dpdcart.com/subscriber/content'
@@ -19,6 +20,7 @@ class Download
     episodes_page        = login_subscriber
     episodes_information = extract_episodes_information episodes_page
     episodes_information = extract_files_information episodes_information
+    dump episodes_information
     download_files episodes_information
     self.class.logger.info("Finished download")
   end
@@ -26,7 +28,9 @@ class Download
   class << self
     attr_writer :logger
     def logger
-      @logger ||= Logger.new(STDOUT)
+      @logger ||= Logger.new(STDOUT).tap { |logger|
+        logger.level = ENV['VERBOSE'] == 'true' ? Logger::DEBUG : Logger::INFO
+      }
     end
   end
 
@@ -65,10 +69,11 @@ class Download
     end
 
     def extract_files_information episodes_information
-      episodes_information.map { |episode_information|
-        episode_information.dup.merge({
+      episodes_information.reduce([]) { |files_information, episode_information|
+        files_information << episode_information.dup.merge({
           files: extract_single_episode_files_information(episode_information)
         })
+        dump files_information
       }
     end
 
@@ -101,6 +106,14 @@ class Download
           end
         end
       end
+    end
+
+    def dump data, filename = File.join(@episodes_path, 'index.yml')
+      self.class.logger.info("Dumping data in `#{ filename }'")
+      dirname = File.dirname filename
+      FileUtils.mkdir_p dirname unless Dir.exists? dirname
+      YAML.dump(episode_information, File.open(filename, 'w')).close
+      data
     end
 
     def episode_url id
