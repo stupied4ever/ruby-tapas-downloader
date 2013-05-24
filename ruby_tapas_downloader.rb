@@ -2,6 +2,7 @@ require 'mechanize'
 require 'active_support/core_ext/string/inflections'
 require 'logger'
 require 'yaml'
+require 'digest/sha1'
 
 class RubyTapasDownloader
   MAIN_URL    = 'https://rubytapas.dpdcart.com/subscriber/content'
@@ -76,7 +77,7 @@ class RubyTapasDownloader
       episodes_elements.each { |episode_element|
         title = episode_element.search('h3').text
         number = title.match(/\A\s*(\d+)/)
-        number = number.nil? ? title.hash : number[1].to_i
+        number = number.nil? ? Digest::SHA1.hexdigest(title) : number[1].to_i
         @episodes[number] ||= {
           number:     number,
           title:      title,
