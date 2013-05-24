@@ -3,7 +3,7 @@ require 'active_support/core_ext/string/inflections'
 require 'logger'
 require 'yaml'
 
-class Download
+class RubyTapasDownloader
   MAIN_URL    = 'https://rubytapas.dpdcart.com/subscriber/content'
   EPISODE_URL = 'https://rubytapas.dpdcart.com/subscriber/post?id='
   FILE_URL    = 'https://rubytapas.dpdcart.com/subscriber/download?file_id='
@@ -143,4 +143,4 @@ class Download
     end
 end
 
-Download.new.start
+RubyTapasDownloader.new.start
