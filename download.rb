@@ -12,16 +12,18 @@ class Download
     @episodes_path = episodes_path
     @agent = Mechanize.new
     @agent.log = self.class.logger
+    @index_filename = File.join(@episodes_path, 'index.yml')
+    @pages = {}
   end
 
   def start
     self.class.logger.info("Starting download")
     retrieve_env_vars!
-    episodes_page        = login_subscriber
-    episodes_information = extract_episodes_information episodes_page
-    episodes_information = extract_files_information episodes_information
-    dump episodes_information
-    download_files episodes_information
+    restore_episodes!
+    login_subscriber
+    extract_episodes
+    extract_files
+    download_files
     self.class.logger.info("Finished download")
   end
 
@@ -44,84 +46,98 @@ class Download
       end
     end
 
+    def restore_episodes!
+      self.class.logger.info("Restoring episodes from `#@index_filename'")
+      @episodes ||= if File.exists? @index_filename
+                      YAML.load(File.read(@index_filename))
+                    else
+                      {}
+                    end
+    end
+
+    def dump_episodes
+      self.class.logger.info("Dumping episodes in `#@index_filename'")
+      FileUtils.mkdir_p File.dirname(@index_filename)
+      YAML.dump(@episodes, File.open(@index_filename, 'w')).close
+    end
+
     def login_subscriber
       self.class.logger.info("Logging in subscriber `#@username'")
-      login_page = @agent.get(MAIN_URL)
+      @pages[:login] = login_page = @agent.get(MAIN_URL)
       login_form = login_page.form_with(action: %r{\A/subscriber/login})
       login_form.username = @username
       login_form.password = @password
-      login_form.submit
+      @pages[:episodes_index] = login_form.submit
     end
 
-    def extract_episodes_information episodes_page
+    def extract_episodes
       self.class.logger.info("Extracting episodes information")
-      episodes_elements = episodes_page.search('.blog-entry')
-      episodes_elements.map { |episode_element|
-        {
-          title: episode_element.search('h3').text,
-          id:    episode_element.search('a')
-                                .last
-                                .attribute('href')
-                                .value
-                                .match(/id=(\d+)/)[1]
+      episodes_elements = @pages[:episodes_index].search('.blog-entry')
+      episodes_elements.each { |episode_element|
+        full_title = episode_element.search('h3').text
+        _, number, title = full_title.match(/\A\s*(\d+)\s*(\S.*)\z/)
+        @episodes[number] ||= {
+          number:     number,
+          title:      title,
+          full_title: full_title,
+          post_id:    episode_element.search('a')
+                                     .last
+                                     .attribute('href')
+                                     .value
+                                     .match(/id=(\d+)/)[1]
         }
       }
     end
 
-    def extract_files_information episodes_information
-      episodes_information.reduce([]) { |files_information, episode_information|
-        files_information << episode_information.dup.merge({
-          files: extract_single_episode_files_information(episode_information)
-        })
-        dump files_information
+    def extract_files
+      @episodes.each { |number, episode|
+        @episodes[number][:files] ||= extract_episode_files(episode)
+        dump_episodes
       }
     end
 
-    def extract_single_episode_files_information episode_information
-      self.class.logger.info("Extracting files information for episode `#{ episode_information[:title] }'")
-      episode_page = @agent.get(episode_url(episode_information[:id]))
+    def extract_episode_files episode
+      self.class.logger.info("Extracting files information for episode `#{ episode[:full_title] }'")
+      @pages[:episodes] ||= {}
+      @pages[:episodes][episode[:post_id]] =
+        episode_page = @agent.get(episode_url(episode[:post_id]))
       files_link = episode_page.links_with href: %r{\A/subscriber/download}
       files_link.map { |file_link|
         {
-          filename: file_link.text,
-          id:       file_link.href.match(/file_id=(\d+)/)[1]
+          id:       file_link.href.match(/file_id=(\d+)/)[1],
+          filename: file_link.text
         }
       }
     end
 
-    def download_files episodes
-      episodes.each do |episode|
-        self.class.logger.info("Downloading files for episode `#{ episode[:title] }'")
+    def download_files
+      @episodes.each do |number, episode|
+        self.class.logger.info("Downloading files for episode `#{ episode[:full_title] }'")
         episode[:files].each do |file|
-          file_path          = File.join @episodes_path,
-                                         file[:filename].parameterize
-          complete_filename  = File.join file_path, file[:filename]
-          FileUtils.mkdir_p(file_path) unless Dir.exists? file_path
-          if File.exists? complete_filename
-            self.class.logger.info("Skipping already existing file `#{ complete_filename }'")
+          episode_path = episode_path episode
+          filename = File.join episode_path, file[:filename]
+          FileUtils.mkdir_p(episode_path)
+          if File.exists? filename
+            self.class.logger.info("Skipping already existing file `#{ filename }'")
           else
-            self.class.logger.info("Start downloading file `#{ complete_filename }'")
-            @agent.download file_url(file[:id]), complete_filename
-            self.class.logger.info("Finish downloading file `#{ complete_filename }'")
+            self.class.logger.info("Start downloading file `#{ filename }'")
+            @agent.download file_url(file[:id]), filename
+            self.class.logger.info("Finish downloading file `#{ filename }'")
           end
         end
       end
     end
 
-    def dump data, filename = File.join(@episodes_path, 'index.yml')
-      self.class.logger.info("Dumping data in `#{ filename }'")
-      dirname = File.dirname filename
-      FileUtils.mkdir_p dirname unless Dir.exists? dirname
-      YAML.dump(episode_information, File.open(filename, 'w')).close
-      data
-    end
-
-    def episode_url id
-      "#{ EPISODE_URL }#{ id }"
+    def episode_url post_id
+      "#{ EPISODE_URL }#{ post_id }"
     end
 
     def file_url id
       "#{ FILE_URL }#{ id }"
+    end
+
+    def episode_path episode
+      File.join @episodes_path, episode[:full_title].parameterize
     end
 end
 
