@@ -1,5 +1,6 @@
 require 'mechanize'
 require 'active_support/core_ext/string/inflections'
+require 'active_support/core_ext/object/blank'
 require 'logger'
 require 'yaml'
 
@@ -74,12 +75,12 @@ class Download
       self.class.logger.info("Extracting episodes information")
       episodes_elements = @pages[:episodes_index].search('.blog-entry')
       episodes_elements.each { |episode_element|
-        full_title = episode_element.search('h3').text
-        _, number, title = full_title.match(/\A\s*(\d+)\s*(\S.*)\z/)
+        title = episode_element.search('h3').text
+        number = title.match(/\A\s*(\d+)/)[1]
+        number = number.blank? ? title.hash : number.to_i
         @episodes[number] ||= {
           number:     number,
           title:      title,
-          full_title: full_title,
           post_id:    episode_element.search('a')
                                      .last
                                      .attribute('href')
@@ -91,13 +92,15 @@ class Download
 
     def extract_files
       @episodes.each { |number, episode|
-        @episodes[number][:files] ||= extract_episode_files(episode)
-        dump_episodes
+        if @episodes[number][:files].nil?
+          @episodes[number][:files] = extract_episode_files(episode)
+          dump_episodes
+        end
       }
     end
 
     def extract_episode_files episode
-      self.class.logger.info("Extracting files information for episode `#{ episode[:full_title] }'")
+      self.class.logger.info("Extracting files information for episode `#{ episode[:title] }'")
       @pages[:episodes] ||= {}
       @pages[:episodes][episode[:post_id]] =
         episode_page = @agent.get(episode_url(episode[:post_id]))
@@ -112,7 +115,7 @@ class Download
 
     def download_files
       @episodes.each do |number, episode|
-        self.class.logger.info("Downloading files for episode `#{ episode[:full_title] }'")
+        self.class.logger.info("Downloading files for episode `#{ episode[:title] }'")
         episode[:files].each do |file|
           episode_path = episode_path episode
           filename = File.join episode_path, file[:filename]
@@ -137,7 +140,7 @@ class Download
     end
 
     def episode_path episode
-      File.join @episodes_path, episode[:full_title].parameterize
+      File.join @episodes_path, episode[:title].parameterize
     end
 end
 
