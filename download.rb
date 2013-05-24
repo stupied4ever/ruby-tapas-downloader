@@ -47,7 +47,7 @@ class Download
     end
 
     def restore_episodes!
-      self.class.logger.info("Restoring episodes from `#@index_filename'")
+      self.class.logger.info("Restoring episode index from `#@index_filename'")
       @episodes ||= if File.exists? @index_filename
                       YAML.load(File.read(@index_filename))
                     else
@@ -56,7 +56,7 @@ class Download
     end
 
     def dump_episodes
-      self.class.logger.info("Dumping episodes in `#@index_filename'")
+      self.class.logger.info("Dumping episode index in `#@index_filename'")
       FileUtils.mkdir_p File.dirname(@index_filename)
       YAML.dump(@episodes, File.open(@index_filename, 'w')).close
     end
