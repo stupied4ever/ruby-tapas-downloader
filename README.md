@@ -38,7 +38,7 @@ Run it:
 $ env USERNAME='<username>' PASSWORD='<password>' ruby ruby_tapas_downloader.rb
 ```
 
-Pretty regular Ruby application, huh?
+Pretty standard Ruby application, huh?
 
 An optional `VERBOSE` environment variable is available. When set to `true`,
 it logs the hell out of operations, which is useful for debugging.
@@ -57,6 +57,13 @@ that you don't redistribute the downloaded material. Ruby Tapas Downloader is
 only an utility tool and doesn't substitute the subscription.
 
 You should do no evil!
+
+Thanks
+------
+
+Thanks Avdi Grimm for putting all this great material out the door!
+
+I learn a lot from you.
 
 License
 -------
