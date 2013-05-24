@@ -2,7 +2,6 @@ require 'mechanize'
 require 'active_support/core_ext/string/inflections'
 require 'logger'
 require 'yaml'
-require 'digest/sha1'
 
 class RubyTapasDownloader
   MAIN_URL    = 'https://rubytapas.dpdcart.com/subscriber/content'
@@ -76,34 +75,31 @@ class RubyTapasDownloader
       episodes_elements = @pages[:episodes_index].search('.blog-entry')
       episodes_elements.each { |episode_element|
         title = episode_element.search('h3').text
-        number = title.match(/\A\s*(\d+)/)
-        number = number.nil? ? Digest::SHA1.hexdigest(title) : number[1].to_i
-        @episodes[number] ||= {
-          number:     number,
-          title:      title,
-          post_id:    episode_element.search('a')
-                                     .last
-                                     .attribute('href')
-                                     .value
-                                     .match(/id=(\d+)/)[1]
-        }
+        id    = episode_element.search('a')
+                               .last
+                               .attribute('href')
+                               .value
+                               .match(/id=(\d+)/)[1]
+        @episodes[id] ||= { title: title }
       }
     end
 
     def extract_files
-      @episodes.each { |number, episode|
-        if @episodes[number][:files].nil?
-          @episodes[number][:files] = extract_episode_files(episode)
+      @episodes.each { |id, episode|
+        if @episodes[id][:files].nil?
+          self.class.logger.info("Extracting files information for episode `#{ episode[:title] }'")
+          @episodes[id][:files] = extract_episode_files(id)
           dump_episodes
+        else
+          self.class.logger.info("Skipping extraction of files information for episode `#{ episode[:title] }'")
         end
       }
     end
 
-    def extract_episode_files episode
-      self.class.logger.info("Extracting files information for episode `#{ episode[:title] }'")
+    def extract_episode_files id
       @pages[:episodes] ||= {}
-      @pages[:episodes][episode[:post_id]] =
-        episode_page = @agent.get(episode_url(episode[:post_id]))
+      @pages[:episodes][id] =
+        episode_page = @agent.get(episode_url(id))
       files_link = episode_page.links_with href: %r{\A/subscriber/download}
       files_link.map { |file_link|
         {
@@ -131,8 +127,8 @@ class RubyTapasDownloader
       end
     end
 
-    def episode_url post_id
-      "#{ EPISODE_URL }#{ post_id }"
+    def episode_url id
+      "#{ EPISODE_URL }#{ id }"
     end
 
     def file_url id
