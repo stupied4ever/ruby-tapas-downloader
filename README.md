@@ -14,11 +14,31 @@ organizes them for later use and keeps an easy to use index of episodes.
 Usage
 -----
 
-Clone this repository or download `ruby_tapas_downloader.rb`. Run it with:
+Clone this repository:
+
+```bash
+$ git clone git://github.com/leafac/ruby-tapas-downloader.git
+```
+
+Change to the newly created directory:
+
+```bash
+$ cd ruby-tapas-downloader
+```
+
+Install dependencies:
+
+```bash
+$ bundle install
+```
+
+Run it:
 
 ```bash
 $ env USERNAME='<username>' PASSWORD='<password>' ruby ruby_tapas_downloader.rb
 ```
+
+Pretty regular Ruby application, huh?
 
 An optional `VERBOSE` environment variable is available. When set to `true`,
 it logs the hell out of operations, which is useful for debugging.
