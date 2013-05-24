@@ -124,6 +124,7 @@ class RubyTapasDownloader
             self.class.logger.info("Finish downloading file `#{ filename }'")
           end
         end
+        self.class.logger.info("Finish downloading files for episode `#{ episode[:title] }'")
       end
     end
 
