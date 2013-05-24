@@ -1,6 +1,5 @@
 require 'mechanize'
 require 'active_support/core_ext/string/inflections'
-require 'active_support/core_ext/object/blank'
 require 'logger'
 require 'yaml'
 
@@ -76,8 +75,8 @@ class Download
       episodes_elements = @pages[:episodes_index].search('.blog-entry')
       episodes_elements.each { |episode_element|
         title = episode_element.search('h3').text
-        number = title.match(/\A\s*(\d+)/)[1]
-        number = number.blank? ? title.hash : number.to_i
+        number = title.match(/\A\s*(\d+)/)
+        number = number.nil? ? title.hash : number[1].to_i
         @episodes[number] ||= {
           number:     number,
           title:      title,
@@ -114,12 +113,12 @@ class Download
     end
 
     def download_files
-      @episodes.each do |number, episode|
+      @episodes.each_value do |episode|
         self.class.logger.info("Downloading files for episode `#{ episode[:title] }'")
         episode[:files].each do |file|
           episode_path = episode_path episode
-          filename = File.join episode_path, file[:filename]
           FileUtils.mkdir_p(episode_path)
+          filename = File.join episode_path, file[:filename]
           if File.exists? filename
             self.class.logger.info("Skipping already existing file `#{ filename }'")
           else
