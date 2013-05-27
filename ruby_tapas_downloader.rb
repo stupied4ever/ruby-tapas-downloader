@@ -91,7 +91,7 @@ class RubyTapasDownloader
           @episodes[id][:files] = extract_episode_files(id)
           dump_episodes
         else
-          self.class.logger.info("Skipping extraction of files information for episode `#{ episode[:title] }'")
+          self.class.logger.debug("Skipping extraction of files information for episode `#{ episode[:title] }'")
         end
       }
     end
@@ -117,7 +117,7 @@ class RubyTapasDownloader
           FileUtils.mkdir_p(episode_path)
           filename = File.join episode_path, file[:filename]
           if File.exists? filename
-            self.class.logger.info("Skipping already existing file `#{ filename }'")
+            self.class.logger.debug("Skipping already existing file `#{ filename }'")
           else
             self.class.logger.info("Start downloading file `#{ filename }'")
             @agent.download file_url(file[:id]), filename
