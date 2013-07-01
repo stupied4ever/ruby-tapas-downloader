@@ -26,10 +26,16 @@ Change to the newly created directory:
 $ cd ruby-tapas-downloader
 ```
 
+Install dependencies:
+
+```bash
+$ bundle install
+```
+
 Run it:
 
 ```bash
-$ ruby ruby_tapas_downloader.rb <username> <password>
+$ env USERNAME='<username>' PASSWORD='<password>' ruby ruby_tapas_downloader.rb
 ```
 
 Pretty standard Ruby application, huh?
@@ -39,6 +45,9 @@ it logs the hell out of operations, which is useful for debugging.
 
 Episodes and code are downloaded to a directory called `episodes` in the
 current folder.
+
+An `index.yml` is kept under `episodes` as well for referencing and preventing
+future repetitive requests.
 
 Warning
 -------
