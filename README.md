@@ -29,7 +29,7 @@ $ cd ruby-tapas-downloader
 Run it:
 
 ```bash
-$ ruby ruby_tapas_downloader.rb <username> <password> [episodes_path]
+$ ruby ruby_tapas_downloader.rb <username> <password>
 ```
 
 Pretty standard Ruby application, huh?
