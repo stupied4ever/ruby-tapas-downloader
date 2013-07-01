@@ -53,7 +53,7 @@ class RubyTapasDownloader
     end
 
     def canonical_title
-      title.downcase.gsub(/\s+/, '-')
+      title.downcase.gsub(/\s+/, '-').tr('^a-z0-9-', '')
     end
 
     protected
