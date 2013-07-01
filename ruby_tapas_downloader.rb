@@ -1,10 +1,14 @@
 require 'logger'
+require 'uri'
 require 'open-uri'
 require 'rss'
 require 'rexml/document'
 
 class RubyTapasDownloader
-  FEED_URL = 'https://rubytapas.dpdcart.com/feed'
+  URIS = {
+    feed:  URI('https://rubytapas.dpdcart.com/feed'),
+    login: URI('https://rubytapas.dpdcart.com/subscriber/login')
+  }
 
   class Options
     attr_reader :username
@@ -75,8 +79,8 @@ class RubyTapasDownloader
   def episodes
     if @episodes.nil?
       self.class.logger.info 'Starting retrieval of episodes using feed ' \
-                             "from `#{ FEED_URL }'"
-      rss  = open(FEED_URL,
+                             "from `#{ URIS[:feed] }'"
+      rss  = open(URIS[:feed],
                   http_basic_authentication: [options.username,
                                               options.password]).read
       feed = RSS::Parser.parse rss
@@ -104,11 +108,8 @@ class RubyTapasDownloader
                                   "file `#{ file_path }'"
         else
           self.class.logger.info "Starting download of file `#{ file_path }'"
-          open(episode_file.url, 'rb') do |content|
-            File.open(file_path, 'wb') do |file|
-              file.write content
-            end
-          end
+          content = open(episode_file.url, 'rb', 'Cookie' => cookie).read
+          File.open(file_path, 'wb') { |file| file.write content }
         end
       end
     end
@@ -129,6 +130,21 @@ class RubyTapasDownloader
   protected
 
     attr_writer :options
+
+    def cookie
+      if @cookie.nil?
+        require 'pry'; binding.pry # TODO: Remove this
+        http         = Net::HTTP.new(URIS[:login].host, URIS[:login].port)
+        http.use_ssl = true
+        response = http.get URIS[:login].path
+        @cookie = response.response['set-cookie'].split(';').first
+        http.post URIS[:login].path,
+          "username=#{ options.username }&password=#{ options.username }",
+          'Cookie' => @cookie
+      end
+
+      @cookie
+    end
 end
 
 RubyTapasDownloader.new(ARGV).start
