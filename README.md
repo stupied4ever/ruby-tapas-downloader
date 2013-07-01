@@ -1,7 +1,10 @@
 Ruby Tapas Downloader
 =====================
 
-[Ruby Tapas][1] is a great series of screencasts by [Avdi Grimm][2]. You should
+**Deprecated**: This code is no longer maintained as I switched to
+[Snackpack][1]. Coding this hack was a fun experiment but it's over.
+
+[Ruby Tapas][2] is a great series of screencasts by [Avdi Grimm][3]. You should
 totally check it out if you don't already know it!
 
 There's only one problem with Ruby Tapas, in my opinion: there's no way to
@@ -83,5 +86,6 @@ License
      0. You just DO WHAT THE FUCK YOU WANT TO.
 
 
-[1]: http://www.rubytapas.com/
-[2]: http://devblog.avdi.org/
+[1]: https://github.com/cas27/snackpack
+[2]: http://www.rubytapas.com/
+[3]: http://devblog.avdi.org/
