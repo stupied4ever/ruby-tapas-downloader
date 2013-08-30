@@ -20,6 +20,8 @@ describe RubyTapasDownloader::Episode do
     let(:agent)        { double }
     let(:episode_path) { File.join basepath, sanitized_title }
 
+    before { allow(FileUtils).to receive(:mkdir_p) }
+
     it 'creates folder for episode with sanitized title' do
       expect(FileUtils).to receive(:mkdir_p).with(episode_path)
 

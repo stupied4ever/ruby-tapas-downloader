@@ -10,6 +10,7 @@ class RubyTapasDownloader::File
   def download basepath, agent
     FileUtils.mkdir_p basepath
 
-    agent.download link, File.join(basepath, name)
+    file_path = File.join(basepath, name)
+    agent.download link, file_path unless File.exists? file_path
   end
 end

@@ -12,6 +12,9 @@ describe RubyTapasDownloader::File do
   describe '#download' do
     let(:basepath)     { '/tmp/ruby-tapas/some-episode' }
     let(:agent)        { double(download: true) }
+    let(:file_path)    { File.join basepath, name }
+
+    before { allow(FileUtils).to receive(:mkdir_p) }
 
     it 'creates folder for file' do
       expect(FileUtils).to receive(:mkdir_p).with(basepath)
@@ -20,7 +23,14 @@ describe RubyTapasDownloader::File do
     end
 
     it 'downloads the file' do
-      expect(agent).to receive(:download).with(link, File.join(basepath, name))
+      expect(agent).to receive(:download).with(link, file_path)
+
+      file.download basepath, agent
+    end
+
+    it 'avoids repeating download' do
+      allow(File).to receive(:exists?).with(file_path).and_return(true)
+      expect(agent).to_not receive(:download)
 
       file.download basepath, agent
     end
