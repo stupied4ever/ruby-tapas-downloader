@@ -37,6 +37,13 @@ describe RubyTapasDownloader::Episode do
     end
   end
 
+  describe '#==' do
+    it 'compares title, link and files' do
+      expect(episode).to eq(
+             RubyTapasDownloader::Episode.new title, link, files)
+    end
+  end
+
   describe '#eql?' do
     it 'compares title, link and files' do
       expect(episode.eql?(

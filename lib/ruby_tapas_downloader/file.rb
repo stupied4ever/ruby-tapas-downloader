@@ -14,6 +14,10 @@ class RubyTapasDownloader::File
     agent.download link, file_path unless File.exists? file_path
   end
 
+  def == other
+    name == other.name && link == other.link
+  end
+
   def eql? other
     name.eql?(other.name) && link.eql?(other.link)
   end

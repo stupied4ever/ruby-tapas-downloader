@@ -36,6 +36,12 @@ describe RubyTapasDownloader::File do
     end
   end
 
+  describe '#==' do
+    it 'compares name and link' do
+      expect(file).to eq(RubyTapasDownloader::File.new(name, link))
+    end
+  end
+
   describe '#eql?' do
     it 'compares name and link' do
       expect(file.eql? RubyTapasDownloader::File.new(name, link)).to be_true

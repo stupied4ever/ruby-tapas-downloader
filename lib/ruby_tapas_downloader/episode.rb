@@ -19,6 +19,10 @@ class RubyTapasDownloader::Episode
     files.each { |file| file.download episode_path, agent }
   end
 
+  def == other
+    title = other.title && link == other.link && files == other.files
+  end
+
   def eql? other
     title.eql?(other.title) && link.eql?(other.link) && files.eql?(other.files)
   end
