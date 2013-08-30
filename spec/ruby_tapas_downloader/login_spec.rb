@@ -5,14 +5,16 @@ describe RubyTapasDownloader::Login do
     RubyTapasDownloader::Login.new agent, email, password
   }
 
-  let(:agent)    { double }
+  let(:agent)    { Mechanize.new }
   let(:email)    { 'someone@example.com' }
   let(:password) { 'chunky bacon' }
 
   it 'requests the login page' do
-    expect(agent).to receive(:get).with(RubyTapasDownloader::Config.urls
+    VCR.use_cassette('login') do
+      expect(agent).to receive(:get).with(RubyTapasDownloader::Config.urls
                                                                 .fetch(:login))
-    ruby_tapas_downloader.perform
+      ruby_tapas_downloader.perform
+    end
   end
 
   it 'fills in the login form'
