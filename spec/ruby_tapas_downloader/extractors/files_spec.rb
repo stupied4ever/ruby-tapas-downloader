@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe RubyTapasDownloader::DescriptionParser do
-  subject(:description_parser) {
-    RubyTapasDownloader::DescriptionParser.new
+describe RubyTapasDownloader::Extractors::Files do
+  subject(:files_extractor) {
+    RubyTapasDownloader::Extractors::Files.new
   }
 
-  describe '#parse' do
-    subject(:files) { description_parser.parse feed_description }
+  describe '#extract' do
+    subject(:files) { files_extractor.extract feed_description }
 
     let(:feed_description) { File.read 'spec/fixtures/feed_description.html' }
 

@@ -1,5 +1,5 @@
-class RubyTapasDownloader::DescriptionParser
-  def parse feed_description
+class RubyTapasDownloader::Extractors::Files
+  def extract feed_description
     files = Set.new
     document = REXML::Document.new feed_description
     document.elements.each('//li/a') { |element|
