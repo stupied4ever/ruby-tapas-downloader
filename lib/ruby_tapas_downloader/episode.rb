@@ -1,4 +1,6 @@
 class RubyTapasDownloader::Episode
+  include RubyTapasDownloader::Downloadable
+
   attr_reader :title
   attr_reader :link
   attr_reader :files

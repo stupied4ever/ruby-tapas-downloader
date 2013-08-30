@@ -9,6 +9,10 @@ describe RubyTapasDownloader::File do
   specify('#name') { expect(file.name).to eq(name) }
   specify('#link') { expect(file.link).to eq(link) }
 
+  it 'is downloadable' do
+    expect(file).to be_a RubyTapasDownloader::Downloadable
+  end
+
   describe '#download' do
     let(:basepath)     { '/tmp/ruby-tapas/some-episode' }
     let(:agent)        { double(download: true) }

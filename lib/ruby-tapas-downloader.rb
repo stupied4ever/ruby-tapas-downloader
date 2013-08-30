@@ -10,9 +10,12 @@ require 'set'
 require 'bundler/setup'
 require 'mechanize'
 
+require_relative 'ruby_tapas_downloader/downloadable'
+require_relative 'ruby_tapas_downloader/file'
+require_relative 'ruby_tapas_downloader/episode'
+require_relative 'ruby_tapas_downloader/catalog'
+
+require_relative 'ruby_tapas_downloader/extractors'
+
 require_relative 'ruby_tapas_downloader/config'
 require_relative 'ruby_tapas_downloader/login'
-require_relative 'ruby_tapas_downloader/episode'
-require_relative 'ruby_tapas_downloader/file'
-require_relative 'ruby_tapas_downloader/description_parser'
-require_relative 'ruby_tapas_downloader/extractors'

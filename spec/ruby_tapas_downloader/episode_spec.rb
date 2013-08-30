@@ -15,6 +15,10 @@ describe RubyTapasDownloader::Episode do
     expect(episode.sanitized_title).to eq(sanitized_title)
   end
 
+  it 'is downloadable' do
+    expect(episode).to be_a RubyTapasDownloader::Downloadable
+  end
+
   describe '#download' do
     let(:basepath)     { '/tmp/ruby-tapas' }
     let(:agent)        { double }
