@@ -1,4 +1,4 @@
-class RubyTapasDownloader::Extractors::Files
+class RubyTapasDownloader::Extractors::Files < RubyTapasDownloader::Extractor
   def extract feed_description
     files = Set.new
     document = REXML::Document.new feed_description
