@@ -7,3 +7,4 @@ require 'mechanize'
 
 require_relative 'ruby_tapas_downloader/config'
 require_relative 'ruby_tapas_downloader/login'
+require_relative 'ruby_tapas_downloader/episode'
