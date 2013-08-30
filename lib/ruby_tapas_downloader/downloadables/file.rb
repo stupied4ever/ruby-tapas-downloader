@@ -1,5 +1,5 @@
-class RubyTapasDownloader::File
-  include RubyTapasDownloader::Downloadable
+class RubyTapasDownloader::Downloadables::File <
+                                              RubyTapasDownloader::Downloadable
 
   attr_reader :name
   attr_reader :link

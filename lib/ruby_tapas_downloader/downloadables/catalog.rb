@@ -1,5 +1,5 @@
-class RubyTapasDownloader::Catalog
-  include RubyTapasDownloader::Downloadable
+class RubyTapasDownloader::Downloadables::Catalog <
+                                              RubyTapasDownloader::Downloadable
 
   attr_reader :episodes
 

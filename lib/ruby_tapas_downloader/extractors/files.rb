@@ -5,7 +5,7 @@ class RubyTapasDownloader::Extractors::Files < RubyTapasDownloader::Extractor
     document.elements.each('//li/a') { |element|
       name = element.text
       link = element.attribute('href').to_s
-      files << RubyTapasDownloader::File.new(name, link)
+      files << RubyTapasDownloader::Downloadables::File.new(name, link)
     }
     files
   end

@@ -8,6 +8,6 @@ class RubyTapasDownloader::Extractors::Episode < RubyTapasDownloader::Extractor
     link  = item.link
     files = @files_extractor.extract item.description
 
-    RubyTapasDownloader::Episode.new title, link, files
+    RubyTapasDownloader::Downloadables::Episode.new title, link, files
   end
 end

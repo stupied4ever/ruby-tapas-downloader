@@ -5,6 +5,10 @@ describe RubyTapasDownloader::Extractors::Files do
     RubyTapasDownloader::Extractors::Files.new
   }
 
+  it 'is an Extractor' do
+    expect(files_extractor).to be_a RubyTapasDownloader::Extractor
+  end
+
   describe '#extract' do
     subject(:files) { files_extractor.extract feed_description }
 
@@ -13,13 +17,13 @@ describe RubyTapasDownloader::Extractors::Files do
     it 'returns a Set of Files' do
       expect(files).to eq(
         Set[
-          RubyTapasDownloader::File.new(
+          RubyTapasDownloader::Downloadables::File.new(
             'some-episode-file.html',
             'http://example.com/some-episode-file.html'),
-          RubyTapasDownloader::File.new(
+          RubyTapasDownloader::Downloadables::File.new(
             'some-episode-file.mp4',
             'http://example.com/some-episode-file.mp4'),
-          RubyTapasDownloader::File.new(
+          RubyTapasDownloader::Downloadables::File.new(
             'some-episode-file.rb',
             'http://example.com/some-episode-file.rb'),
         ]

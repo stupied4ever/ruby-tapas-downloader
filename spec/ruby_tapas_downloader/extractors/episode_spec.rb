@@ -7,6 +7,10 @@ describe RubyTapasDownloader::Extractors::Episode do
 
   let(:files_extractor) { double }
 
+  it 'is an Extractor' do
+    expect(episode_extractor).to be_a RubyTapasDownloader::Extractor
+  end
+
   describe '#extract' do
     subject(:episode) { episode_extractor.extract item }
 
@@ -16,13 +20,13 @@ describe RubyTapasDownloader::Extractors::Episode do
 
     let(:files) {
       Set[
-        RubyTapasDownloader::File.new(
+        RubyTapasDownloader::Downloadables::File.new(
           'some-episode-file.html',
           'http://example.com/some-episode-file.html'),
-        RubyTapasDownloader::File.new(
+        RubyTapasDownloader::Downloadables::File.new(
           'some-episode-file.mp4',
           'http://example.com/some-episode-file.mp4'),
-        RubyTapasDownloader::File.new(
+        RubyTapasDownloader::Downloadables::File.new(
           'some-episode-file.rb',
           'http://example.com/some-episode-file.rb'),
       ]
@@ -35,9 +39,12 @@ describe RubyTapasDownloader::Extractors::Episode do
 
     it 'returns an Episode' do
       expect(episode).to eq(
-        RubyTapasDownloader::Episode.new('129 Some episode',
-                                         'http://example.com/some-episode',
-                                         files))
+        RubyTapasDownloader::Downloadables::Episode.new(
+          '129 Some episode',
+          'http://example.com/some-episode',
+          files
+        )
+      )
     end
   end
 end

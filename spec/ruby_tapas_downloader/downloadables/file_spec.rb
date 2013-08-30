@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe RubyTapasDownloader::File do
-  subject(:file) { RubyTapasDownloader::File.new name, link }
+describe RubyTapasDownloader::Downloadables::File do
+  subject(:file) { RubyTapasDownloader::Downloadables::File.new name, link }
 
   let(:name) { 'an-awesome-screencast.mp4' }
   let(:link) { 'http://example.com/an-awesome-screencast.mp4'}
@@ -42,13 +42,16 @@ describe RubyTapasDownloader::File do
 
   describe '#==' do
     it 'compares name and link' do
-      expect(file).to eq(RubyTapasDownloader::File.new(name, link))
+      expect(file).to eq(
+                      RubyTapasDownloader::Downloadables::File.new(name, link))
     end
   end
 
   describe '#eql?' do
     it 'compares name and link' do
-      expect(file.eql? RubyTapasDownloader::File.new(name, link)).to be_true
+      expect(
+        file.eql? RubyTapasDownloader::Downloadables::File.new(name, link)
+      ).to be_true
     end
   end
 

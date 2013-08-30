@@ -17,6 +17,14 @@ Usage
 
 **TODO**
 
+To-do
+-----
+
+* Actually download stuff.
+* Interface.
+* Logs.
+* Documentation.
+
 Warning
 -------
 

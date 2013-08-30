@@ -1,7 +1,9 @@
 require 'spec_helper'
 
-describe RubyTapasDownloader::Episode do
-  subject(:episode) { RubyTapasDownloader::Episode.new title, link, files }
+describe RubyTapasDownloader::Downloadables::Episode do
+  subject(:episode) {
+    RubyTapasDownloader::Downloadables::Episode.new title, link, files
+  }
 
   let(:title)           { '999 Some: Ruby Tapas Episode with <<' }
   let(:link)            { 'http://example.com' }
@@ -44,14 +46,16 @@ describe RubyTapasDownloader::Episode do
   describe '#==' do
     it 'compares title, link and files' do
       expect(episode).to eq(
-             RubyTapasDownloader::Episode.new title, link, files)
+           RubyTapasDownloader::Downloadables::Episode.new title, link, files)
     end
   end
 
   describe '#eql?' do
     it 'compares title, link and files' do
-      expect(episode.eql?(
-             RubyTapasDownloader::Episode.new title, link, files)).to be_true
+      expect(
+        episode.eql?(
+          RubyTapasDownloader::Downloadables::Episode.new title, link, files)
+      ).to be_true
     end
   end
 
