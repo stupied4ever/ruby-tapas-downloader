@@ -35,4 +35,16 @@ describe RubyTapasDownloader::File do
       file.download basepath, agent
     end
   end
+
+  describe '#eql?' do
+    it 'compares name and link' do
+      expect(file.eql? RubyTapasDownloader::File.new(name, link)).to be_true
+    end
+  end
+
+  describe '#hash' do
+    it 'is based on name and link' do
+      expect(file.hash).to eq(name.hash + link.hash)
+    end
+  end
 end

@@ -36,4 +36,17 @@ describe RubyTapasDownloader::Episode do
       episode.download basepath, agent
     end
   end
+
+  describe '#eql?' do
+    it 'compares title, link and files' do
+      expect(episode.eql?(
+             RubyTapasDownloader::Episode.new title, link, files)).to be_true
+    end
+  end
+
+  describe '#hash' do
+    it 'is based on title, link and files' do
+      expect(episode.hash).to eq(title.hash + link.hash + files.hash)
+    end
+  end
 end

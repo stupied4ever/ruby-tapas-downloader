@@ -18,4 +18,12 @@ class RubyTapasDownloader::Episode
     FileUtils.mkdir_p episode_path
     files.each { |file| file.download episode_path, agent }
   end
+
+  def eql? other
+    title.eql?(other.title) && link.eql?(other.link) && files.eql?(other.files)
+  end
+
+  def hash
+    title.hash + link.hash + files.hash
+  end
 end
