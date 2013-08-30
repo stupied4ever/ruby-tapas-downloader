@@ -22,7 +22,7 @@ class RubyTapasDownloader::Episode
   end
 
   def == other
-    title = other.title && link == other.link && files == other.files
+    title == other.title && link == other.link && files == other.files
   end
 
   def eql? other

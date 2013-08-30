@@ -1,17 +1,26 @@
 class RubyTapasDownloader::Catalog
-  def initialize feed
-    @feed = feed
+  include RubyTapasDownloader::Downloadable
+
+  attr_reader :episodes
+
+  def initialize episodes
+    @episodes = episodes
   end
 
-  def episodes
-    @episodes ||= extract_episodes_from_feed
+  def download basepath, agent
+    FileUtils.mkdir_p basepath
+    episodes.each { |episode| episode.download basepath, agent }
   end
 
-  private
+  def == other
+    episodes == other.episodes
+  end
 
-  def extract_episodes_from_feed
-    @feed.items.map { |item|
+  def eql? other
+    episodes.eql? other.episodes
+  end
 
-    }
+  def hash
+    episodes.hash
   end
 end
