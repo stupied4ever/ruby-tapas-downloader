@@ -5,7 +5,20 @@ describe RubyTapasDownloader::Extractors::Episode do
     RubyTapasDownloader::Extractors::Episode.new files_extractor
   }
 
-  let(:files_extractor) { double }
+  let(:files_extractor) { double(extract: files) }
+  let(:files) {
+    Set[
+      RubyTapasDownloader::Downloadables::File.new(
+        'some-episode-file.html',
+        'http://example.com/some-episode-file.html'),
+      RubyTapasDownloader::Downloadables::File.new(
+        'some-episode-file.mp4',
+        'http://example.com/some-episode-file.mp4'),
+      RubyTapasDownloader::Downloadables::File.new(
+        'some-episode-file.rb',
+        'http://example.com/some-episode-file.rb'),
+    ]
+  }
 
   it 'is an Extractor' do
     expect(episode_extractor).to be_a RubyTapasDownloader::Extractor
@@ -18,23 +31,10 @@ describe RubyTapasDownloader::Extractors::Episode do
       RSS::Parser.parse(File.open('spec/fixtures/feed.xml')).items.first
     }
 
-    let(:files) {
-      Set[
-        RubyTapasDownloader::Downloadables::File.new(
-          'some-episode-file.html',
-          'http://example.com/some-episode-file.html'),
-        RubyTapasDownloader::Downloadables::File.new(
-          'some-episode-file.mp4',
-          'http://example.com/some-episode-file.mp4'),
-        RubyTapasDownloader::Downloadables::File.new(
-          'some-episode-file.rb',
-          'http://example.com/some-episode-file.rb'),
-      ]
-    }
-
-    before do
-      allow(files_extractor).to receive(:extract).with(item.description)
-                                                 .and_return(files)
+    it 'uses Extractors::Files' do
+      expect(files_extractor).to receive(:extract).with(item.description)
+                                                  .and_return(files)
+      episode_extractor.extract item
     end
 
     it 'returns an Episode' do
