@@ -3,8 +3,6 @@ class RubyTapasDownloader::Login
   attr_reader :email
   attr_reader :password
 
-  attr_reader :page
-
   def initialize agent, email, password
     @agent    = agent
     @email    = email
@@ -15,10 +13,6 @@ class RubyTapasDownloader::Login
     request_login_page
     fill_login_form
     submit_login_form
-  end
-
-  def login_form
-    page.forms.first
   end
 
   private
@@ -33,6 +27,10 @@ class RubyTapasDownloader::Login
   end
 
   def submit_login_form
-    # TODO
+    login_form.submit
+  end
+
+  def login_form
+    @page.forms.first
   end
 end
