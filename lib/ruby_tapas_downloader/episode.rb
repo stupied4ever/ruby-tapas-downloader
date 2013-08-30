@@ -13,9 +13,9 @@ class RubyTapasDownloader::Episode
     @sanitized_title ||= title.downcase.gsub(/[^\w<>]+/, '-')
   end
 
-  def download path
-    episode_path = File.join path, sanitized_title
+  def download basepath, agent
+    episode_path = File.join basepath, sanitized_title
     FileUtils.mkdir_p episode_path
-    files.each { |file| file.download episode_path }
+    files.each { |file| file.download episode_path, agent }
   end
 end

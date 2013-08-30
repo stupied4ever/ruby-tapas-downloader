@@ -17,20 +17,21 @@ describe RubyTapasDownloader::Episode do
 
   describe '#download' do
     let(:basepath)     { '/tmp/ruby-tapas' }
+    let(:agent)        { double }
     let(:episode_path) { File.join basepath, sanitized_title }
 
     it 'creates folder for episode with sanitized title' do
       expect(FileUtils).to receive(:mkdir_p).with(episode_path)
 
-      episode.download basepath
+      episode.download basepath, agent
     end
 
-    it 'calls #download on each file with episode path' do
+    it 'calls #download on each file' do
       files.each do |file|
-        expect(file).to receive(:download).with(episode_path)
+        expect(file).to receive(:download).with(episode_path, agent)
       end
 
-      episode.download basepath
+      episode.download basepath, agent
     end
   end
 end
