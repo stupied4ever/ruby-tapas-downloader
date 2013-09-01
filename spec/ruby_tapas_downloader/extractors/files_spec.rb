@@ -10,24 +10,35 @@ describe RubyTapasDownloader::Extractors::Files do
   end
 
   describe '#extract' do
-    subject(:files) { files_extractor.extract item_description }
+    subject(:extracted_files) { files_extractor.extract item_description }
 
     let(:item_description) { File.read 'spec/fixtures/feed_description.html' }
+    let(:files) {
+      Set[
+        RubyTapasDownloader::Downloadables::File.new(
+          'some-episode-file.html',
+          'http://example.com/some-episode-file.html'),
+        RubyTapasDownloader::Downloadables::File.new(
+          'some-episode-file.mp4',
+          'http://example.com/some-episode-file.mp4'),
+        RubyTapasDownloader::Downloadables::File.new(
+          'some-episode-file.rb',
+          'http://example.com/some-episode-file.rb'),
+      ]
+   }
 
     it 'returns a Set of Files' do
-      expect(files).to eq(
-        Set[
-          RubyTapasDownloader::Downloadables::File.new(
-            'some-episode-file.html',
-            'http://example.com/some-episode-file.html'),
-          RubyTapasDownloader::Downloadables::File.new(
-            'some-episode-file.mp4',
-            'http://example.com/some-episode-file.mp4'),
-          RubyTapasDownloader::Downloadables::File.new(
-            'some-episode-file.rb',
-            'http://example.com/some-episode-file.rb'),
-        ]
-      )
+      expect(extracted_files).to eq(files)
+    end
+
+    context 'list of links in description that are not attached files' do
+      let(:item_description) {
+        File.read('spec/fixtures/feed_description_with_list.html')
+      }
+
+      it 'ignores the list' do
+        expect(extracted_files).to eq(files)
+      end
     end
   end
 end

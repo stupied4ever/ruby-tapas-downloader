@@ -22,7 +22,7 @@
       <title><![CDATA[129 Some episode]]></title>
       <link>http://example.com/some-episode</link>
       <description><![CDATA[<div class="blog-entry">
-          <div class="blog-content"><p>Short description on episode</p>
+          <div class="blog-content"><p>Short description of episode</p>
           </div>
           <h3>Attached Files</h3>
           <ul>
@@ -40,7 +40,7 @@
       <title><![CDATA[130 Some other episode]]></title>
       <link>http://example.com/some-other-episode</link>
       <description><![CDATA[<div class="blog-entry">
-          <div class="blog-content"><p>Short description on other episode</p>
+          <div class="blog-content"><p>Short description of other episode</p>
           </div>
           <h3>Attached Files</h3>
           <ul>
