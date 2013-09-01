@@ -12,7 +12,7 @@ class RubyTapasDownloader::Downloadables::Episode <
   end
 
   def sanitized_title
-    @sanitized_title ||= title.downcase.gsub(/[^\w<>]+/, '-')
+    @sanitized_title ||= title.downcase.gsub(/[^\w<>#?!$]+/, '-')
   end
 
   def download basepath, agent

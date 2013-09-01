@@ -26,7 +26,8 @@ class RubyTapasDownloader::CLI
   end
 
   def fetch_feed
-    @feed = RubyTapasDownloader::FeedFetcher.new(@agent).fetch
+    @feed = RubyTapasDownloader::FeedFetcher.new(@agent, @email, @password)
+                                                                         .fetch
   end
 
   def create_catalog

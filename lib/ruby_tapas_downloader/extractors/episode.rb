@@ -4,7 +4,7 @@ class RubyTapasDownloader::Extractors::Episode < RubyTapasDownloader::Extractor
   end
 
   def extract item
-    title = item.title
+    title = CGI.unescapeHTML item.title
     link  = item.link
     files = @files_extractor.extract item.description
 

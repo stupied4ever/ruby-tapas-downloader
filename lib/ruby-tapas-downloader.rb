@@ -3,6 +3,7 @@ require 'fileutils'
 require 'rss'
 require 'rexml/document'
 require 'set'
+require 'cgi'
 require 'logger'
 
 module RubyTapasDownloader

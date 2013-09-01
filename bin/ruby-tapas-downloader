@@ -7,6 +7,6 @@ $ ruby-tapas-downloader <email> <password> <download-path>
   USAGE
 end
 
-require_relative '../lib/ruby-tapas-downloader'
+require_relative '../lib/ruby_tapas_downloader/cli'
 
 RubyTapasDownloader::CLI.new(*ARGV).download

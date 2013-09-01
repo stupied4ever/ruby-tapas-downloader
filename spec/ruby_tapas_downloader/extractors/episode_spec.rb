@@ -46,5 +46,11 @@ describe RubyTapasDownloader::Extractors::Episode do
         )
       )
     end
+
+    it 'decodes HTML entities in title' do
+      item.title = '120 class &lt;&lt; self'
+
+      expect(episode.title).to eq('120 class << self')
+    end
   end
 end
