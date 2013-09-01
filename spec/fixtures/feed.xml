@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+  <channel>
+    <title>Example</title>
+    <link>https://example.com</link>
+    <description/>
+    <pubDate>Thu, 29 Aug 2013 09:00:00 -0400</pubDate>
+    <managingEditor>example@example.com</managingEditor>
+    <language>en</language>
+    <copyright>Copyright 2013 Example</copyright>
+    <generator>example.com</generator>
+    <itunes:summary>Example: example example</itunes:summary>
+    <itunes:image href="http://example.com/example.png"/>
+    <image>
+      <url>http://example.com/example.png</url>
+      <title>Example</title>
+      <link>http://example.com</link>
+      <width>849</width>
+      <height>849</height>
+    </image>
+    <item>
+      <title><![CDATA[129 Some episode]]></title>
+      <link>http://example.com/some-episode</link>
+      <description><![CDATA[<div class="blog-entry">
+          <div class="blog-content"><p>Short description of episode</p>
+          </div>
+          <h3>Attached Files</h3>
+          <ul>
+            <li><a href="http://example.com/some-episode-file.html">some-episode-file.html</a></li>
+            <li><a href="http://example.com/some-episode-file.mp4">some-episode-file.mp4</a></li>
+            <li><a href="http://example.com/some-episode-file.rb">some-episode-file.rb</a></li>
+      </ul></div>]]></description>
+      <guid isPermaLink="false">asslaksda-sdfasd-fkasdfkas-ka-sdjga-sdfk-</guid>
+      <pubDate>Thu, 29 Aug 2013 09:00:00 -0400</pubDate>
+      <enclosure url="http://example.com/some-episode-file.mp4" length="25085949" type="video/mp4"/>
+      <itunes:subtitle>Some subtitle</itunes:subtitle>
+      <itunes:image href="http://example.com/example.png"/>
+    </item>
+    <item>
+      <title><![CDATA[130 Some other episode]]></title>
+      <link>http://example.com/some-other-episode</link>
+      <description><![CDATA[<div class="blog-entry">
+          <div class="blog-content"><p>Short description of other episode</p>
+          </div>
+          <h3>Attached Files</h3>
+          <ul>
+            <li><a href="http://example.com/some-other-episode-file.html">some-other-episode-file.html</a></li>
+            <li><a href="http://example.com/some-other-episode-file.mp4">some-other-episode-file.mp4</a></li>
+            <li><a href="http://example.com/some-other-episode-file.rb">some-other-episode-file.rb</a></li>
+      </ul></div>]]></description>
+      <guid isPermaLink="false">laksdjfasd-fasjgasfgkasdjf-asdfajdskfjadsf-</guid>
+      <pubDate>Thu, 29 Aug 2013 09:00:00 -0400</pubDate>
+      <enclosure url="http://example.com/some-other-episode-file.mp4" length="25085949" type="video/mp4"/>
+      <itunes:subtitle>Some subtitle</itunes:subtitle>
+      <itunes:image href="http://example.com/example.png"/>
+    </item>
+  </channel>
+</rss>

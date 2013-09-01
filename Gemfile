@@ -1,8 +1,8 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
 gem 'mechanize'
-gem 'activesupport'
 
-group :development do
-  gem 'pry-nav'
+group :test do
+  gem 'rspec'
+  gem 'pry-debugger'
 end

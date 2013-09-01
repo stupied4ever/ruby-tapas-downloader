@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+if ARGV.count != 3
+  abort <<-USAGE
+Usage:
+$ ruby-tapas-downloader <email> <password> <download-path>
+  USAGE
+end
+
+require_relative '../lib/ruby_tapas_downloader/cli'
+
+RubyTapasDownloader::CLI.new(*ARGV).download

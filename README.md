@@ -1,11 +1,9 @@
 Ruby Tapas Downloader
 =====================
 
-**Deprecated**: This code is no longer maintained as I switched to
-[Snackpack][1]. Coding this hack was a fun experiment but it's over.
-
-[Ruby Tapas][2] is a great series of screencasts by [Avdi Grimm][3]. You should
-totally check it out if you don't already know it!
+[Ruby Tapas][ruby-tapas] is a great series of screencasts by
+[Avdi Grimm][avdi-grimm]. You should totally check it out if you don't already
+know it!
 
 There's only one problem with Ruby Tapas, in my opinion: there's no way to
 watch it via straming. One can only download episodes, which soon becomes
@@ -14,43 +12,30 @@ tedious.
 Enters Ruby Tapas Downloader! It downloads all episodes and attachments,
 organizes them for later use and keeps an easy to use index of episodes.
 
+Installation
+------------
+
+1. Clone this repository:
+
+  ```bash
+  $ git clone https://github.com/leafac/ruby-tapas-downloader.git
+  ```
+
+2. Install dependencies:
+
+  ```bash
+  $ bundle install
+  ```
+
+If you really like this utility, please let me know so I can make it into a
+gem!
+
 Usage
 -----
 
-Clone this repository:
-
 ```bash
-$ git clone git://github.com/leafac/ruby-tapas-downloader.git
+$ bin/ruby-tapas-downloader <email> <password> <download-path>
 ```
-
-Change to the newly created directory:
-
-```bash
-$ cd ruby-tapas-downloader
-```
-
-Install dependencies:
-
-```bash
-$ bundle install
-```
-
-Run it:
-
-```bash
-$ env USERNAME='<username>' PASSWORD='<password>' ruby ruby_tapas_downloader.rb
-```
-
-Pretty standard Ruby application, huh?
-
-An optional `VERBOSE` environment variable is available. When set to `true`,
-it logs the hell out of operations, which is useful for debugging.
-
-Episodes and code are downloaded to a directory called `episodes` in the
-current folder.
-
-An `index.yml` is kept under `episodes` as well for referencing and preventing
-future repetitive requests.
 
 Warning
 -------
@@ -86,6 +71,5 @@ License
      0. You just DO WHAT THE FUCK YOU WANT TO.
 
 
-[1]: https://github.com/cas27/snackpack
-[2]: http://www.rubytapas.com/
-[3]: http://devblog.avdi.org/
+[ruby-tapas]: http://www.rubytapas.com/
+[avdi-grimm]: http://devblog.avdi.org/
