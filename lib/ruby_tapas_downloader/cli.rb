@@ -1,12 +1,17 @@
 require_relative '../ruby-tapas-downloader'
 
+# The Command Line Interface for Ruby Tapas Downloader.
 class RubyTapasDownloader::CLI
+  # @param email [String] the e-mail for the user.
+  # @param password [String] the password for the user.
+  # @param download_path [String] the path in which the download is performed.
   def initialize email, password, download_path
     @email         = email
     @password      = password
     @download_path = download_path
   end
 
+  # Perform complete download procedure.
   def download
     create_agent
     login
@@ -22,7 +27,7 @@ class RubyTapasDownloader::CLI
   end
 
   def login
-    RubyTapasDownloader::Login.new(@agent, @email, @password).perform
+    RubyTapasDownloader::Login.new(@agent, @email, @password).login
   end
 
   def fetch_feed

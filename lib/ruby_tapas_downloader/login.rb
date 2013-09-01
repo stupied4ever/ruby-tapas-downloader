@@ -1,6 +1,14 @@
+# Perform Login in Ruby Tapas.
+#
+# Login must be performed before any attempt to download files.
 class RubyTapasDownloader::Login
+  # @return [Mechanize] the Mechanize agent.
   attr_reader :agent
+
+  # @return [String] the e-mail for the user.
   attr_reader :email
+
+  # @return [String] the password for the user.
   attr_reader :password
 
   def initialize agent, email, password
@@ -9,7 +17,8 @@ class RubyTapasDownloader::Login
     @password = password
   end
 
-  def perform
+  # Perform login.
+  def login
     RubyTapasDownloader.logger.info 'Logging in...'
     request_login_page
     fill_login_form

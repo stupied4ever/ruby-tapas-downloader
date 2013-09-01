@@ -1,7 +1,11 @@
+# The File resource of an Episode.
 class RubyTapasDownloader::Downloadables::File <
                                               RubyTapasDownloader::Downloadable
 
+  # @return [String] the name of the File.
   attr_reader :name
+
+  # @return [String] the link to download the File.
   attr_reader :link
 
   def initialize name, link
@@ -9,6 +13,9 @@ class RubyTapasDownloader::Downloadables::File <
     @link = link
   end
 
+  # Download the File.
+  #
+  # @param (see: RubyTapasDownloader::Downloadables::Catalog#download)
   def download basepath, agent
     FileUtils.mkdir_p basepath
 

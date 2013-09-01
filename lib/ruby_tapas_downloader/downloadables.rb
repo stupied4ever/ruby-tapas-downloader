@@ -1,3 +1,4 @@
+# Namespace module for Downloadable assets.
 module RubyTapasDownloader::Downloadables
 end
 

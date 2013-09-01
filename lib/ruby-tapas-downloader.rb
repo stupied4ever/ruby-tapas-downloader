@@ -8,8 +8,10 @@ require 'logger'
 
 module RubyTapasDownloader
   class << self
+    # The Logger for RubyTapasDownloader.
     attr_writer :logger
 
+    # @return [Logger] the Logger for RubyTapasDownloader
     def logger
       @logger ||= Logger.new STDOUT
     end

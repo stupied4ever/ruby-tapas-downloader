@@ -16,22 +16,22 @@ describe RubyTapasDownloader::Login do
            :submit    => nil
   }
 
-  describe '#perform' do
+  describe '#login' do
     it 'requests the login page' do
       expect(agent).to receive(:get)
                        .with(RubyTapasDownloader::Config.urls.fetch(:login))
-      ruby_tapas_downloader.perform
+      ruby_tapas_downloader.login
     end
 
     it 'fills in the login form' do
       expect(login_form).to receive(:username=).with(email)
       expect(login_form).to receive(:password=).with(password)
-      ruby_tapas_downloader.perform
+      ruby_tapas_downloader.login
     end
 
     it 'submits the login form' do
       expect(login_form).to receive(:submit)
-      ruby_tapas_downloader.perform
+      ruby_tapas_downloader.login
     end
   end
 end

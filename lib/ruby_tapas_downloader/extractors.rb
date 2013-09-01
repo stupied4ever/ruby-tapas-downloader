@@ -1,3 +1,4 @@
+# Namespace module for Extractors.
 module RubyTapasDownloader::Extractors
 end
 
