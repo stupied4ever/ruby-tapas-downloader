@@ -12,18 +12,30 @@ tedious.
 Enters Ruby Tapas Downloader! It downloads all episodes and attachments,
 organizes them for later use and keeps an easy to use index of episodes.
 
+Installation
+------------
+
+1. Clone this repository:
+
+  ```bash
+  $ git clone https://github.com/leafac/ruby-tapas-downloader.git
+  ```
+
+2. Install dependencies:
+
+  ```bash
+  $ bundle install
+  ```
+
+If you really like this utility, please let me know so I can make it into a
+gem!
+
 Usage
 -----
 
-**TODO**
-
-To-do
------
-
-* Actually download stuff.
-* Interface.
-* Logs.
-* Documentation.
+```bash
+$ bin/ruby-tapas-downloader <email> <password> <download-path>
+```
 
 Warning
 -------
