@@ -1,11 +1,19 @@
-module RubyTapasDownloader
-end
-
 require 'yaml'
 require 'fileutils'
 require 'rss'
 require 'rexml/document'
 require 'set'
+require 'logger'
+
+module RubyTapasDownloader
+  class << self
+    attr_writer :logger
+
+    def logger
+      @logger ||= Logger.new STDOUT
+    end
+  end
+end
 
 require 'bundler/setup'
 require 'mechanize'

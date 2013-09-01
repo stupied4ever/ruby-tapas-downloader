@@ -13,6 +13,8 @@ class RubyTapasDownloader::Downloadables::File <
     FileUtils.mkdir_p basepath
 
     file_path = File.join(basepath, name)
+    RubyTapasDownloader.logger.info "Starting download of file `#{ name }' " \
+                                    "in `#{ file_path }'..."
     agent.download link, file_path unless File.exists? file_path
   end
 

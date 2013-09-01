@@ -6,6 +6,7 @@ class RubyTapasDownloader::FeedFetcher
   end
 
   def fetch
+    RubyTapasDownloader.logger.info 'Fetching episodes feed...'
     agent.get(RubyTapasDownloader::Config.urls[:feed]).body
   end
 end

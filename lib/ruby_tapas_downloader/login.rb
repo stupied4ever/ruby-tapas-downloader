@@ -10,6 +10,7 @@ class RubyTapasDownloader::Login
   end
 
   def perform
+    RubyTapasDownloader.logger.info 'Logging in...'
     request_login_page
     fill_login_form
     submit_login_form

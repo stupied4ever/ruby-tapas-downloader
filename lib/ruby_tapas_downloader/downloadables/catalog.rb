@@ -8,6 +8,8 @@ class RubyTapasDownloader::Downloadables::Catalog <
   end
 
   def download basepath, agent
+    RubyTapasDownloader.logger.info 'Starting download of catalog in ' \
+                                    "`#{ basepath }'..."
     FileUtils.mkdir_p basepath
     episodes.each { |episode| episode.download basepath, agent }
   end
