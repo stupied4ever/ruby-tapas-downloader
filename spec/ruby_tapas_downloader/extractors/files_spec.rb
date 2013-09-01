@@ -10,9 +10,9 @@ describe RubyTapasDownloader::Extractors::Files do
   end
 
   describe '#extract' do
-    subject(:files) { files_extractor.extract feed_description }
+    subject(:files) { files_extractor.extract item_description }
 
-    let(:feed_description) { File.read 'spec/fixtures/feed_description.html' }
+    let(:item_description) { File.read 'spec/fixtures/feed_description.html' }
 
     it 'returns a Set of Files' do
       expect(files).to eq(
