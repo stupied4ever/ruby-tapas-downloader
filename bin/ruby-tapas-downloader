@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 
-if ARGV.count != 3
+if ARGV.count < 3
   abort <<-USAGE
 Usage:
-$ ruby-tapas-downloader <email> <password> <download-path>
+$ ruby-tapas-downloader <email> <password> <download-path> <no_ssl_verify>
   USAGE
 end
 
