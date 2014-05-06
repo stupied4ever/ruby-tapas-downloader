@@ -5,6 +5,7 @@ require 'rexml/document'
 require 'set'
 require 'cgi'
 require 'logger'
+require 'pathname'
 
 module RubyTapasDownloader
   class << self
