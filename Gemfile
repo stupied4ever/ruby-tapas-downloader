@@ -1,8 +1,4 @@
-source "https://rubygems.org"
+source 'http://rubygems.org'
 
-gem 'mechanize'
-
-group :test do
-  gem 'rspec'
-  gem 'pry-debugger'
-end
+# Specify your gem's dependencies in pismo.gemspec
+gemspec

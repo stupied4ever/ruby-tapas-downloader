@@ -15,26 +15,15 @@ organizes them for later use and keeps an easy to use index of episodes.
 Installation
 ------------
 
-1. Clone this repository:
-
-  ```bash
-  $ git clone https://github.com/leafac/ruby-tapas-downloader.git
-  ```
-
-2. Install dependencies:
-
-  ```bash
-  $ bundle install
-  ```
-
-If you really like this utility, please let me know so I can make it into a
-gem!
+```bash
+$ gem install ruby-tapas-downloader
+```
 
 Usage
 -----
 
 ```bash
-$ bin/ruby-tapas-downloader <email> <password> <download-path>
+$ ruby-tapas-downloader <email> <password> <download-path>
 ```
 
 Warning
@@ -52,24 +41,6 @@ Thanks
 Thanks Avdi Grimm for putting all this great material out the door!
 
 I learn a lot from you.
-
-License
--------
-
-               DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-                       Version 2, December 2004
-
-    Copyright (C) 2013 Leandro Facchinetti <leafac@gmail.com>
-
-    Everyone is permitted to copy and distribute verbatim or modified
-    copies of this license document, and changing it is allowed as long
-    as the name is changed.
-
-               DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-      TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
-
-     0. You just DO WHAT THE FUCK YOU WANT TO.
-
 
 [ruby-tapas]: http://www.rubytapas.com/
 [avdi-grimm]: http://devblog.avdi.org/
