@@ -15,26 +15,15 @@ organizes them for later use and keeps an easy to use index of episodes.
 Installation
 ------------
 
-1. Clone this repository:
-
-  ```bash
-  $ git clone https://github.com/leafac/ruby-tapas-downloader.git
-  ```
-
-2. Install dependencies:
-
-  ```bash
-  $ bundle install
-  ```
-
-If you really like this utility, please let me know so I can make it into a
-gem!
+```bash
+$ gem install ruby-tapas-downloader
+```
 
 Usage
 -----
 
 ```bash
-$ bin/ruby-tapas-downloader <email> <password> <download-path>
+$ ruby-tapas-downloader <email> <password> <download-path>
 ```
 
 Warning
