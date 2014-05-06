@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.executables      = `git ls-files -- bin/*`.split("\n").map{ |f|
     File.basename(f)
   }
-  s.homepage         = 'http://rubygems.org/gems/ruby-tapas-downloader'
+  s.homepage         = 'https://github.com/leafac/ruby-tapas-downloader'
   s.license          = 'wtfpl'
   s.require_paths    = ['lib']
 
