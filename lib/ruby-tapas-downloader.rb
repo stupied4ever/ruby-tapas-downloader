@@ -26,6 +26,7 @@ require_relative 'ruby_tapas_downloader/downloadables'
 
 require_relative 'ruby_tapas_downloader/extractors'
 
+require_relative 'ruby_tapas_downloader/params'
 require_relative 'ruby_tapas_downloader/config'
 require_relative 'ruby_tapas_downloader/login'
 require_relative 'ruby_tapas_downloader/feed_fetcher'
