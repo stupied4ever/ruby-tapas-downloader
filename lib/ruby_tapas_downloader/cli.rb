@@ -31,7 +31,12 @@ To download you need to be authenticated, you have tree options:
       default: Config.default_password,
       aliases: '-p'
     )
-    option(:path, required: true, default: Config.default_path, aliases: '-l')
+    option(
+      :download_path,
+      required: true,
+      default: Config.default_download_path,
+      aliases: '-d'
+    )
     long_desc download_long_description
     def download
       create_agent
@@ -43,12 +48,12 @@ To download you need to be authenticated, you have tree options:
 
     # Configure user preferences
     desc 'configure -e foo@bar.com -p 123 -l .', 'Configure user preferences'
-    option :email,    required: true, aliases: '-e'
-    option :password, required: true, aliases: '-p'
-    option :path,     required: true, aliases: '-l'
+    option :email,         required: true, aliases: '-e'
+    option :password,      required: true, aliases: '-p'
+    option :download_path, required: true, aliases: '-d'
     def configure
       RubyTapasDownloader::Config.update(
-        email: email, password: password, path: path
+        email: email, password: password, download_path: download_path
       )
     end
 
@@ -62,8 +67,8 @@ To download you need to be authenticated, you have tree options:
       options[:password]
     end
 
-    def path
-      options[:path]
+    def download_path
+      options[:download_path]
     end
 
     def create_agent

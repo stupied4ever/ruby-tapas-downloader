@@ -3,9 +3,9 @@ require 'user-configurations'
 # Retrieve configurations.
 class RubyTapasDownloader::Config
   CONFIG_KEYS = [
-    EMAIL    = 'RUBY_TAPAS_DOWNLOADER_EMAIL',
-    PASSWORD = 'RUBY_TAPAS_DOWNLOADER_PASSWORD',
-    PATH     = 'RUBY_TAPAS_DOWNLOADER_PATH'
+    EMAIL         = 'RUBY_TAPAS_DOWNLOADER_EMAIL',
+    PASSWORD      = 'RUBY_TAPAS_DOWNLOADER_PASSWORD',
+    DOWNLOAD_PATH = 'RUBY_TAPAS_DOWNLOADER_DOWNLOAD_PATH'
   ]
 
   class << self
@@ -27,17 +27,21 @@ class RubyTapasDownloader::Config
     end
 
     # Default Download path
-    def default_path
-      user_configurations[PATH]
+    def default_download_path
+      user_configurations[DOWNLOAD_PATH]
     end
 
     # Updates user preferences
-    def update(email: nil, password: nil, path: nil)
-      new_configs = { EMAIL => email, PASSWORD => password, PATH => path }
+    def update(email: nil, password: nil, download_path: nil)
+      download_path = absolute_path(download_path)
 
-      user_configurations[EMAIL]    = email
-      user_configurations[PASSWORD] = password
-      user_configurations[PATH]     = absolute_path(path)
+      new_configs = {
+        EMAIL => email, PASSWORD => password, DOWNLOAD_PATH => download_path
+      }
+
+      user_configurations[EMAIL]         = email
+      user_configurations[PASSWORD]      = password
+      user_configurations[DOWNLOAD_PATH] = download_path
 
       user_configurations.store new_configs
     end
@@ -53,7 +57,7 @@ class RubyTapasDownloader::Config
     def absolute_path(path)
       return path if (Pathname.new path).absolute?
 
-      File.join(Dir.pwd, path)
+      File.expand_path(Dir.pwd, path)
     end
 
     def urls_config_path

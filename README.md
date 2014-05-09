@@ -23,14 +23,14 @@ Usage
 -----
 
 ```bash
-$ ruby-tapas-downloader download -e <email> -p <password> -l <path>
+$ ruby-tapas-downloader download -e <email> -p <password> -d <download_path>
 ```
 
 If you prefer, you can pre-configure, in that way you dont need authenticate
 every download.
 
 ```bash
-$ ruby-tapas-downloader configure -e <email> -p <password> -l <path>
+$ ruby-tapas-downloader configure -e <email> -p <password> -d <download_path>
 ```
 
 One other alternative is to pass/export env vars:
@@ -38,7 +38,7 @@ One other alternative is to pass/export env vars:
 ```bash
 $ export RUBY_TAPAS_DOWNLOADER_EMAIL=someone@example.com
 $ export RUBY_TAPAS_DOWNLOADER_PASSWORD=123
-$ export RUBY_TAPAS_DOWNLOADER_PATH=.
+$ export RUBY_TAPAS_DOWNLOADER_DOWNLOAD_PATH=.
 
 $ ruby-tapas-downloader download
 ```
