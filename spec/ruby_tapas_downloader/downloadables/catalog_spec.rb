@@ -12,23 +12,37 @@ describe RubyTapasDownloader::Downloadables::Catalog do
   end
 
   describe '#download' do
-    let(:basepath)     { '/tmp/ruby-tapas' }
+    subject(:download_catalod) { catalog.download basepath, agent }
+
+    let(:basepath)     { Dir.pwd }
     let(:agent)        { double }
 
     before { allow(FileUtils).to receive(:mkdir_p) }
-
-    it 'creates folder for catalog' do
-      expect(FileUtils).to receive(:mkdir_p).with(basepath)
-
-      catalog.download basepath, agent
-    end
 
     it 'calls #download on each episode' do
       episodes.each do |episode|
         expect(episode).to receive(:download).with(basepath, agent)
       end
 
-      catalog.download basepath, agent
+      download_catalod
+    end
+
+    context 'with invalid download_path' do
+      let(:basepath) { '/tmp/some-crazy-folder/you-dont-have-this' }
+
+      specify do
+        expect { download_catalod }.to raise_error(
+                              RubyTapasDownloader::Exceptions::BadDownloadPath)
+      end
+    end
+
+    context 'with a file instead of a directory' do
+      let(:basepath) { File.absolute_path(__FILE__) }
+
+      specify do
+        expect { download_catalod }.to raise_error(
+                              RubyTapasDownloader::Exceptions::BadDownloadPath)
+      end
     end
   end
 

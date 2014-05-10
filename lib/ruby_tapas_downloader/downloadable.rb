@@ -1,7 +1,7 @@
 # The contract for Downloadables.
 class RubyTapasDownloader::Downloadable
   # Should be implemented by children.
-  def download basepath, agent
+  def download(_basepath, _agent)
     fail NotImplementedError
   end
 end
