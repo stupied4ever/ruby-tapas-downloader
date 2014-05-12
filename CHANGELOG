@@ -1,3 +1,8 @@
+2.0.0
+
+* Add cli for configure user, pass and download_path
+* Fix relative path downloads
+
 1.0.2
 
 * Fix error on config path
