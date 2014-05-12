@@ -88,7 +88,7 @@ To download you need to be authenticated, you have tree options:
     end
 
     def download_catalog
-      @catalog.download path, agent
+      @catalog.download download_path, agent
     end
 
     attr_accessor :agent, :feed
