@@ -21,11 +21,11 @@ Gem::Specification.new do |s|
   s.license          = 'wtfpl'
   s.require_paths    = ['lib']
   s.required_ruby_version     = '>= 2.0.0'
-  
+
   s.add_runtime_dependency 'mechanize', '~> 2.7'
   s.add_runtime_dependency 'user-configurations', '~> 0.1'
   s.add_runtime_dependency 'thor', '~> 0.19'
 
   s.add_development_dependency 'rspec', '~> 2.0'
-  s.add_development_dependency 'pry-debugger', '~> 0.2'
+  s.add_development_dependency 'pry-byebug', '~> 1.3'
 end
