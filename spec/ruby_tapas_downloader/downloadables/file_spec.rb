@@ -4,7 +4,7 @@ describe RubyTapasDownloader::Downloadables::File do
   subject(:file) { RubyTapasDownloader::Downloadables::File.new name, link }
 
   let(:name) { 'an-awesome-screencast.mp4' }
-  let(:link) { 'http://example.com/an-awesome-screencast.mp4'}
+  let(:link) { 'http://example.com/an-awesome-screencast.mp4' }
 
   specify('#name') { expect(file.name).to eq(name) }
   specify('#link') { expect(file.link).to eq(link) }
@@ -33,7 +33,7 @@ describe RubyTapasDownloader::Downloadables::File do
     end
 
     it 'avoids repeating download' do
-      allow(File).to receive(:exists?).with(file_path).and_return(true)
+      allow(File).to receive(:exist?).with(file_path).and_return(true)
       expect(agent).to_not receive(:download)
 
       file.download basepath, agent

@@ -11,7 +11,7 @@ class RubyTapasDownloader::Login
   # @return [String] the password for the user.
   attr_reader :password
 
-  def initialize agent, email, password
+  def initialize(agent, email, password)
     @agent    = agent
     @email    = email
     @password = password

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe RubyTapasDownloader::Downloadables::Episode do
-  subject(:episode) {
+  subject(:episode) do
     RubyTapasDownloader::Downloadables::Episode.new title, link, files
-  }
+  end
 
   let(:title)           { '999 Some: Ruby Tapas Episode with <<' }
   let(:link)            { 'http://example.com' }
@@ -11,7 +11,7 @@ describe RubyTapasDownloader::Downloadables::Episode do
   let(:sanitized_title) { '999-some-ruby-tapas-episode-with-<<' }
 
   specify('#title') { expect(episode.title).to eq(title) }
-  specify('#link' ) { expect(episode.link ).to eq(link ) }
+  specify('#link') { expect(episode.link).to eq(link) }
   specify('#files') { expect(episode.files).to eq(files) }
   specify '#sanitized_title' do
     expect(episode.sanitized_title).to eq(sanitized_title)

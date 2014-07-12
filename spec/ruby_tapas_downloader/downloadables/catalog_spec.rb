@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe RubyTapasDownloader::Downloadables::Catalog do
-  subject(:catalog) {
+  subject(:catalog) do
     RubyTapasDownloader::Downloadables::Catalog.new episodes
-  }
+  end
 
   let(:episodes) { [double(download: true), double(download: true)] }
 

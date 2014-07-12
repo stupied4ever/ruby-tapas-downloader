@@ -7,6 +7,7 @@ require 'cgi'
 require 'logger'
 require 'pathname'
 
+# Root module for Ruby Tapas downloader
 module RubyTapasDownloader
   class << self
     # The Logger for RubyTapasDownloader.

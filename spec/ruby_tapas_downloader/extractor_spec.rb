@@ -6,8 +6,8 @@ describe RubyTapasDownloader::Extractor do
   let(:extractor_class) { Class.new RubyTapasDownloader::Extractor }
 
   describe 'contract' do
-    specify('#extract') {
+    specify('#extract') do
       expect { extractor.extract }.to raise_error NotImplementedError
-    }
+    end
   end
 end

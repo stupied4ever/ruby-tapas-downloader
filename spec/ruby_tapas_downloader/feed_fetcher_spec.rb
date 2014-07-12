@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe RubyTapasDownloader::FeedFetcher do
-  subject(:feed_fetcher) {
+  subject(:feed_fetcher) do
     RubyTapasDownloader::FeedFetcher.new agent, email, password
-  }
+  end
 
   let(:agent)    { double }
   let(:email)    { 'person@example.com' }

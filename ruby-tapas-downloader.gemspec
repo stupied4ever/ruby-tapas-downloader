@@ -1,12 +1,12 @@
-$:.push File.expand_path('../lib', __FILE__)
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
 require 'ruby_tapas_downloader/version'
 
 Gem::Specification.new do |s|
   s.name             = 'ruby-tapas-downloader'
   s.version          = RubyTapasDownloader::VERSION
   s.summary          = 'Downloader for Avdi Grimm Ruby Tapas'
-  s.description      = 'It downloads all episodes and attachments, organizes them '\
-                         'for later use and keeps an easy to use index of episodes.'
+  s.description      = 'It downloads all episodes and attachments, organizes '\
+               'them for later use and keeps an easy to use index of episodes.'
 
   s.authors          = ['Leandro Facchinetti']
   s.email            = 'ruby-tapas-downloader@leafac.com'

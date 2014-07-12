@@ -6,8 +6,8 @@ describe RubyTapasDownloader::Downloadable do
   let(:downloadable_class) { Class.new RubyTapasDownloader::Downloadable }
 
   describe 'contract' do
-    specify('#download') {
+    specify('#download') do
       expect { downloadable.download }.to raise_error NotImplementedError
-    }
+    end
   end
 end
