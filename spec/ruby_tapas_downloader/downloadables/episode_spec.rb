@@ -1,17 +1,21 @@
-require 'spec_helper'
-
 describe RubyTapasDownloader::Downloadables::Episode do
-  subject(:episode) {
+  subject(:episode) do
     RubyTapasDownloader::Downloadables::Episode.new title, link, files
-  }
+  end
+
+  let(:files) do
+    [
+      instance_double(Mechanize, download: true),
+      instance_double(Mechanize, download: true)
+    ]
+  end
 
   let(:title)           { '999 Some: Ruby Tapas Episode with <<' }
   let(:link)            { 'http://example.com' }
-  let(:files)           { [double(download: true), double(download: true)] }
   let(:sanitized_title) { '999-some-ruby-tapas-episode-with-<<' }
 
   specify('#title') { expect(episode.title).to eq(title) }
-  specify('#link' ) { expect(episode.link ).to eq(link ) }
+  specify('#link') { expect(episode.link).to eq(link) }
   specify('#files') { expect(episode.files).to eq(files) }
   specify '#sanitized_title' do
     expect(episode.sanitized_title).to eq(sanitized_title)
@@ -23,7 +27,7 @@ describe RubyTapasDownloader::Downloadables::Episode do
 
   describe '#download' do
     let(:basepath)     { '/tmp/ruby-tapas' }
-    let(:agent)        { double }
+    let(:agent)        { instance_double(Mechanize) }
     let(:episode_path) { File.join basepath, sanitized_title }
 
     before { allow(FileUtils).to receive(:mkdir_p) }
@@ -55,7 +59,7 @@ describe RubyTapasDownloader::Downloadables::Episode do
       expect(
         episode.eql?(
           RubyTapasDownloader::Downloadables::Episode.new title, link, files)
-      ).to be_true
+      ).to be_truthy
     end
   end
 

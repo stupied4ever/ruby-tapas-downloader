@@ -1,12 +1,13 @@
-require 'spec_helper'
-
 describe RubyTapasDownloader::Extractors::Episode do
-  subject(:episode_extractor) {
+  subject(:episode_extractor) do
     RubyTapasDownloader::Extractors::Episode.new files_extractor
-  }
+  end
 
-  let(:files_extractor) { double(extract: files) }
-  let(:files) {
+  let(:files_extractor) do
+    instance_double(RubyTapasDownloader::Extractors::Files, extract: files)
+  end
+
+  let(:files) do
     Set[
       RubyTapasDownloader::Downloadables::File.new(
         'some-episode-file.html',
@@ -18,7 +19,7 @@ describe RubyTapasDownloader::Extractors::Episode do
         'some-episode-file.rb',
         'http://example.com/some-episode-file.rb'),
     ]
-  }
+  end
 
   it 'is an Extractor' do
     expect(episode_extractor).to be_a RubyTapasDownloader::Extractor
@@ -27,9 +28,9 @@ describe RubyTapasDownloader::Extractors::Episode do
   describe '#extract' do
     subject(:episode) { episode_extractor.extract item }
 
-    let(:item) {
+    let(:item) do
       RSS::Parser.parse(File.open('spec/fixtures/feed.xml')).items.first
-    }
+    end
 
     it 'uses Extractors::Files' do
       expect(files_extractor).to receive(:extract).with(item.description)

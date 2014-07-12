@@ -4,14 +4,14 @@ class RubyTapasDownloader::Extractors::Files < RubyTapasDownloader::Extractor
   #   `feed.items[i].description`.
   # @return [Set<RubyTapasDownloader::Downloadables::File>] the Set of Files
   #   extracted from feed item description.
-  def extract item_description
+  def extract(item_description)
     files = Set.new
     document = REXML::Document.new item_description
-    document.elements.each("/div[@class='blog-entry']/ul/li/a") { |element|
+    document.elements.each("/div[@class='blog-entry']/ul/li/a") do |element|
       name = element.text
       link = element.attribute('href').to_s
       files << RubyTapasDownloader::Downloadables::File.new(name, link)
-    }
+    end
     files
   end
 end

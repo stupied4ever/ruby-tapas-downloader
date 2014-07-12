@@ -1,20 +1,18 @@
-require 'spec_helper'
-
 describe RubyTapasDownloader::Login do
-  subject(:ruby_tapas_downloader) {
+  subject(:ruby_tapas_downloader) do
     RubyTapasDownloader::Login.new agent, email, password
-  }
+  end
 
-  let(:agent)    { double get: page }
+  let(:agent)    { instance_double Mechanize, get: page }
   let(:email)    { 'someone@example.com' }
   let(:password) { 'chunky bacon' }
+  let(:page)     { instance_double Mechanize::Page, forms: [login_form] }
 
-  let(:page)       { double forms: [login_form] }
-  let(:login_form) {
+  let(:login_form) do
     double :username= => nil,
            :password= => nil,
            :submit    => nil
-  }
+  end
 
   describe '#login' do
     it 'requests the login page' do

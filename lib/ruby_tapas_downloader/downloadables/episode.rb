@@ -12,7 +12,7 @@ class RubyTapasDownloader::Downloadables::Episode <
   #   for that episode.
   attr_reader :files
 
-  def initialize title, link, files
+  def initialize(title, link, files)
     @title = title
     @link  = link
     @files = files
@@ -25,11 +25,10 @@ class RubyTapasDownloader::Downloadables::Episode <
     @sanitized_title ||= title.downcase.gsub(/[^\w<>#?!$]+/, '-')
   end
 
-
   # Download the Episode.
   #
   # @param (see: RubyTapasDownloader::Downloadables::Catalog#download)
-  def download basepath, agent
+  def download(basepath, agent)
     episode_path = File.join basepath, sanitized_title
     RubyTapasDownloader.logger.info 'Starting download of episode ' \
                                     "`#{ title }' in `#{ episode_path }'..."
@@ -37,11 +36,11 @@ class RubyTapasDownloader::Downloadables::Episode <
     files.each { |file| file.download episode_path, agent }
   end
 
-  def == other
+  def ==(other)
     title == other.title && link == other.link && files == other.files
   end
 
-  def eql? other
+  def eql?(other)
     title.eql?(other.title) && link.eql?(other.link) && files.eql?(other.files)
   end
 

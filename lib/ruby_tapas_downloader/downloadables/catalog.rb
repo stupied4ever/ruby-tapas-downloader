@@ -5,7 +5,7 @@ class RubyTapasDownloader::Downloadables::Catalog <
   # @return [Set<RubyTapasDownloader::Downloadables::Episode>] the Episodes.
   attr_reader :episodes
 
-  def initialize episodes
+  def initialize(episodes)
     @episodes = episodes
   end
 
@@ -13,18 +13,18 @@ class RubyTapasDownloader::Downloadables::Catalog <
   #
   # @param basepath [String] the path to place download.
   # @param agent [Mechanize] the Mechanize agent.
-  def download basepath, agent
+  def download(basepath, agent)
     RubyTapasDownloader.logger.info 'Starting download of catalog in ' \
                                     "`#{ basepath }'..."
     FileUtils.mkdir_p basepath
     episodes.each { |episode| episode.download basepath, agent }
   end
 
-  def == other
+  def ==(other)
     episodes == other.episodes
   end
 
-  def eql? other
+  def eql?(other)
     episodes.eql? other.episodes
   end
 

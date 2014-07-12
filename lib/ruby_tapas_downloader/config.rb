@@ -9,7 +9,6 @@ class RubyTapasDownloader::Config
   ]
 
   class << self
-
     # Retrieve urls stored in `urls.yml`.
     # @return [Hash] the urls stored in `urls.yml`.
     def urls

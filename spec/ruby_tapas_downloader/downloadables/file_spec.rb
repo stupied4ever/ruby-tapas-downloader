@@ -1,10 +1,8 @@
-require 'spec_helper'
-
 describe RubyTapasDownloader::Downloadables::File do
   subject(:file) { RubyTapasDownloader::Downloadables::File.new name, link }
 
   let(:name) { 'an-awesome-screencast.mp4' }
-  let(:link) { 'http://example.com/an-awesome-screencast.mp4'}
+  let(:link) { 'http://example.com/an-awesome-screencast.mp4' }
 
   specify('#name') { expect(file.name).to eq(name) }
   specify('#link') { expect(file.link).to eq(link) }
@@ -15,7 +13,7 @@ describe RubyTapasDownloader::Downloadables::File do
 
   describe '#download' do
     let(:basepath)     { '/tmp/ruby-tapas/some-episode' }
-    let(:agent)        { double(download: true) }
+    let(:agent)        { instance_double(Mechanize, download: true) }
     let(:file_path)    { File.join basepath, name }
 
     before { allow(FileUtils).to receive(:mkdir_p) }
@@ -33,7 +31,7 @@ describe RubyTapasDownloader::Downloadables::File do
     end
 
     it 'avoids repeating download' do
-      allow(File).to receive(:exists?).with(file_path).and_return(true)
+      allow(File).to receive(:exist?).with(file_path).and_return(true)
       expect(agent).to_not receive(:download)
 
       file.download basepath, agent
@@ -51,7 +49,7 @@ describe RubyTapasDownloader::Downloadables::File do
     it 'compares name and link' do
       expect(
         file.eql? RubyTapasDownloader::Downloadables::File.new(name, link)
-      ).to be_true
+      ).to be_truthy
     end
   end
 
