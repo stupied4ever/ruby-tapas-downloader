@@ -51,7 +51,7 @@ describe RubyTapasDownloader::Downloadables::File do
     it 'compares name and link' do
       expect(
         file.eql? RubyTapasDownloader::Downloadables::File.new(name, link)
-      ).to be_true
+      ).to be_truthy
     end
   end
 

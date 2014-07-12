@@ -44,7 +44,7 @@ describe RubyTapasDownloader::Downloadables::Catalog do
   describe '#eql?' do
     it 'compares episodes' do
       expect(catalog.eql?(
-         RubyTapasDownloader::Downloadables::Catalog.new episodes)).to be_true
+        RubyTapasDownloader::Downloadables::Catalog.new episodes)).to be_truthy
     end
   end
 

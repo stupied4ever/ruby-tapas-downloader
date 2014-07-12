@@ -55,7 +55,7 @@ describe RubyTapasDownloader::Downloadables::Episode do
       expect(
         episode.eql?(
           RubyTapasDownloader::Downloadables::Episode.new title, link, files)
-      ).to be_true
+      ).to be_truthy
     end
   end
 
