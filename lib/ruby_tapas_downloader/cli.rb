@@ -22,18 +22,18 @@ To download you need to be authenticated, you have tree options:
   # Perform complete download procedure.
   desc 'download', 'Download new content'
   option(
-    :email, required: true, default: Config.default_email, aliases: '-e'
+    :email, required: true, default: RubyTapasDownloader::Config.default_email, aliases: '-e'
   )
   option(
     :password,
     required: true,
-    default: Config.default_password,
+    default: RubyTapasDownloader::Config.default_password,
     aliases: '-p'
   )
   option(
     :download_path,
     required: true,
-    default: Config.default_download_path,
+    default: RubyTapasDownloader::Config.default_download_path,
     aliases: '-d'
   )
   long_desc download_long_description
