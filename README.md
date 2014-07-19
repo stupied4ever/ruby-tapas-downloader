@@ -1,3 +1,9 @@
+[![Version](http://allthebadges.io/leafac/ruby-tapas-downloader/badge_fury.png)](http://allthebadges.io/leafac/ruby-tapas-downloader/badge_fury)
+[![Dependencies](http://allthebadges.io/leafac/ruby-tapas-downloader/gemnasium.png)](http://allthebadges.io/leafac/ruby-tapas-downloader/gemnasium)
+[![Build Status](http://allthebadges.io/leafac/ruby-tapas-downloader/travis.png)](http://allthebadges.io/leafac/ruby-tapas-downloader/travis)
+[![Coverage](http://allthebadges.io/leafac/ruby-tapas-downloader/coveralls.png)](http://allthebadges.io/leafac/ruby-tapas-downloader/coveralls)
+[![Code Climate](http://allthebadges.io/leafac/ruby-tapas-downloader/code_climate.png)](http://allthebadges.io/leafac/ruby-tapas-downloader/code_climate)
+
 Ruby Tapas Downloader
 =====================
 
