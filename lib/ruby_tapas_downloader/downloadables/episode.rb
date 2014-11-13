@@ -30,7 +30,10 @@ class RubyTapasDownloader::Downloadables::Episode <
   # @param (see: RubyTapasDownloader::Downloadables::Catalog#download)
   def download(basepath, agent)
     episode_path = File.join basepath, sanitized_title
-    unless already_downloaded? episode_path
+    if already_downloaded? episode_path
+      RubyTapasDownloader.logger.debug 'Skipping downloaded episode ' \
+        "`#{ title }' in `#{ episode_path }'..."
+    else
       RubyTapasDownloader.logger.info 'Starting download of episode ' \
         "`#{ title }' in `#{ episode_path }'..."
       FileUtils.mkdir_p episode_path
