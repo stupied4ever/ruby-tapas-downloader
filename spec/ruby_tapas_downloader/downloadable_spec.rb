@@ -4,8 +4,12 @@ describe RubyTapasDownloader::Downloadable do
   let(:downloadable_class) { Class.new RubyTapasDownloader::Downloadable }
 
   describe 'contract' do
+    let(:base_path) {}
+    let(:agent) {}
+
     specify('#download') do
-      expect { downloadable.download }.to raise_error NotImplementedError
+      expect { downloadable.download base_path, agent }
+        .to raise_error NotImplementedError
     end
   end
 end

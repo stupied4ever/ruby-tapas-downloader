@@ -46,7 +46,7 @@ To download you need to be authenticated, you have tree options:
   end
 
   # Configure user preferences
-  desc 'configure -e foo@bar.com -p 123 -l .', 'Configure user preferences'
+  desc 'configure -e foo@bar.com -p 123 -d .', 'Configure user preferences'
   option :email,         required: true, aliases: '-e'
   option :password,      required: true, aliases: '-p'
   option :download_path, required: true, aliases: '-d'

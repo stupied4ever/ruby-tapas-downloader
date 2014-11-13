@@ -12,7 +12,7 @@ Ruby Tapas Downloader
 know it!
 
 There's only one problem with Ruby Tapas, in my opinion: there's no way to
-watch it via straming. One can only download episodes, which soon becomes
+watch it via streaming. One can only download episodes, which soon becomes
 tedious.
 
 Enters Ruby Tapas Downloader! It downloads all episodes and attachments,
@@ -32,7 +32,7 @@ Usage
 $ ruby-tapas-downloader download -e <email> -p <password> -d <download_path>
 ```
 
-If you prefer, you can pre-configure, in that way you dont need authenticate
+If you prefer, you can pre-configure, in that way you don't need to authenticate
 every download.
 
 ```bash
