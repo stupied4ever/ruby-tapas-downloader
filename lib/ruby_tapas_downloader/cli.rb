@@ -9,7 +9,7 @@ class RubyTapasDownloader::CLI < Thor
   def self.download_long_description
     env_vars = RubyTapasDownloader::Config::CONFIG_KEYS.join(',')
     <<-LONG_DESC
-To download you need to be authenticated, you have tree options:
+To download, you need to be authenticated. You have three options:
 
 - Pass the params described before
 
