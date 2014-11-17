@@ -20,9 +20,14 @@ class RubyTapasDownloader::Downloadables::File <
     FileUtils.mkdir_p basepath
 
     file_path = File.join(basepath, name)
-    RubyTapasDownloader.logger.info "Starting download of file `#{ name }' " \
-                                    "in `#{ file_path }'..."
-    agent.download link, file_path unless File.exist? file_path
+    if File.exist? file_path
+      RubyTapasDownloader.logger.debug "Skipping downloaded file `#{ name }' " \
+        "in `#{ file_path }'..."
+    else
+      RubyTapasDownloader.logger.info "Starting download of file `#{ name }' " \
+        "in `#{ file_path }'..."
+      agent.download link, file_path
+    end
   end
 
   def ==(other)

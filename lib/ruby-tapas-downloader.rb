@@ -15,7 +15,7 @@ module RubyTapasDownloader
 
     # @return [Logger] the Logger for RubyTapasDownloader
     def logger
-      @logger ||= Logger.new STDOUT
+      @logger ||= Logger.new(STDOUT).tap { |l| l.level = Logger::INFO }
     end
   end
 end

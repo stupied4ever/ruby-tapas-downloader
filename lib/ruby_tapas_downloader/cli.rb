@@ -36,8 +36,15 @@ To download, you need to be authenticated. You have three options:
     default: RubyTapasDownloader::Config.default_download_path,
     aliases: '-d'
   )
+  option(
+    :verbose,
+    type: :boolean,
+    required: false,
+    default: false
+  )
   long_desc download_long_description
   def download
+    set_log_level
     create_agent
     login
     fetch_feed
@@ -72,6 +79,10 @@ To download, you need to be authenticated. You have three options:
 
   def create_agent
     @agent = Mechanize.new
+  end
+
+  def set_log_level
+    RubyTapasDownloader.logger.level = Logger::DEBUG if options[:verbose]
   end
 
   def login
