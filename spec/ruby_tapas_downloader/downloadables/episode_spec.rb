@@ -19,7 +19,7 @@ describe RubyTapasDownloader::Downloadables::Episode do
 
   let(:title)           { '999 Some: Ruby Tapas Episode with <<' }
   let(:link)            { 'http://example.com' }
-  let(:sanitized_title) { '999-some-ruby-tapas-episode-with-<<' }
+  let(:sanitized_title) { '999-some-ruby-tapas-episode-with-' }
 
   specify('#title') { expect(episode.title).to eq(title) }
   specify('#link') { expect(episode.link).to eq(link) }
