@@ -22,7 +22,7 @@ class RubyTapasDownloader::Downloadables::Episode <
   #
   # @return [String] the sanitized title.
   def sanitized_title
-    @sanitized_title ||= title.downcase.gsub(/[^\w<>#?!$]+/, '-')
+    @sanitized_title ||= title.downcase.gsub(/[\s\x00\/\\:\*\?\"<>\|]+/, '-')
   end
 
   # Download the Episode.
