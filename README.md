@@ -20,7 +20,7 @@ organizes them for later use and keeps an easy to use index of episodes.
 
 ## Alternative
 
-RubyTaps provides an official way to download expisodes automatically using iTunes, open the [episode list](http://rubytapas.dpdcart.com/subscriber/content) and click on the iTunes button on the top right to subscribe.
+RubyTapas provides an official way to download expisodes automatically using iTunes, open the [episode list](http://rubytapas.dpdcart.com/subscriber/content) and click on the iTunes button on the top right to subscribe.
 
 Installation
 ------------
