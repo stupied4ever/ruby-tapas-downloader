@@ -36,6 +36,9 @@ Usage
 $ ruby-tapas-downloader download -e <email> -p <password> -d <download_path>
 ```
 
+`download_path` is the name of a directory, relative to `pwd`. The directory 
+will be created, and episodes saved there.
+
 If you prefer, you can pre-configure, in that way you don't need to authenticate
 every download.
 
