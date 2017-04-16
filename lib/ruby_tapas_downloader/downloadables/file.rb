@@ -26,7 +26,9 @@ class RubyTapasDownloader::Downloadables::File <
     else
       RubyTapasDownloader.logger.info "Starting download of file `#{ name }' " \
         "in `#{ file_path }'..."
-      agent.download link, file_path
+      agent.progressbar do
+        agent.download link, file_path
+      end
     end
   end
 

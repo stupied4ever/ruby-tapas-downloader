@@ -79,6 +79,7 @@ To download, you need to be authenticated. You have three options:
 
   def create_agent
     @agent = Mechanize.new
+    @agent.pluggable_parser.default = Mechanize::Download
   end
 
   def set_log_level

@@ -22,6 +22,8 @@ end
 
 require 'bundler/setup'
 require 'mechanize'
+require 'mechanize/progressbar'
+
 
 require_relative 'ruby_tapas_downloader/exceptions'
 require_relative 'ruby_tapas_downloader/downloadables'
